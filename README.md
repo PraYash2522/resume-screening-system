@@ -26,6 +26,7 @@ The system analyzes resumes, extracts important information, and matches candida
 ## Project Structure
 
 
+```text
 resume-screening-system/
 │
 ├── app.py
@@ -44,6 +45,7 @@ resume-screening-system/
 │   └── css/
 │
 └── uploads/
+```
 
 
 ## Installation

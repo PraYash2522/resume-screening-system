@@ -1,0 +1,1006 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AI Resume Screening{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="hero-section">
+        <h1 class="hero-title">Smart Resume Screening<br><span class="gradient-text">Made Simple</span></h1>
+        <p class="hero-subtitle">Screen hundreds of resumes in seconds using advanced AI.</p>
+        <p class="hero-subtitle">Find the perfect candidate faster than ever before.</p>
+        
+        <div class="cta-buttons">
+            <a href="{{ url_for('auth.signup') }}" class="btn-primary">Get Started Free</a>
+            <a href="{{ url_for('auth.login') }}" class="btn-secondary">Login</a>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card" onclick="openModal('aiMatching')">
+            <div class="feature-icon">🎯</div>
+            <h3>AI Matching</h3>
+            <p>Advanced algorithms analyze skills, experience, and job requirements</p>
+            <div class="card-arrow">→</div>
+        </div>
+
+        <div class="feature-card" onclick="openModal('lightningFast')">
+            <div class="feature-icon">⚡</div>
+            <h3>Lightning Fast</h3>
+            <p>Process hundreds of resumes in seconds, not hours</p>
+            <div class="card-arrow">→</div>
+        </div>
+
+        <div class="feature-card" onclick="openModal('analytics')">
+            <div class="feature-icon">📊</div>
+            <h3>Detailed Analytics</h3>
+            <p>Get comprehensive match scores and insights</p>
+            <div class="card-arrow">→</div>
+        </div>
+
+        <div class="feature-card" onclick="openModal('security')">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure & Private</h3>
+            <p>Your data is encrypted and never shared</p>
+            <div class="card-arrow">→</div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Matching Modal -->
+<div id="aiMatchingModal" class="modal-overlay">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('aiMatching')">&times;</span>
+        <div class="modal-content">
+            <div class="modal-icon">🤖</div>
+            <h2>AI-Powered Matching</h2>
+            <p class="modal-subtitle">See how our intelligent algorithm works</p>
+            
+            <div class="demo-section">
+                <div class="matching-demo">
+                    <div class="demo-item">
+                        <div class="demo-label">Job Requirements</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">AWS</span>
+                        </div>
+                    </div>
+                    
+                    <div class="matching-arrow">↓ AI Analysis ↓</div>
+                    
+                    <div class="demo-item">
+                        <div class="demo-label">Resume Skills Found</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag matched">Python ✓</span>
+                            <span class="skill-tag matched">Django ✓</span>
+                            <span class="skill-tag partial">React (Basic)</span>
+                            <span class="skill-tag missing">AWS ✗</span>
+                        </div>
+                    </div>
+                    
+                    <div class="match-result">
+                        <div class="progress-circle">
+                            <svg width="120" height="120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#e0e0e0" stroke-width="10"/>
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#667eea" stroke-width="10" 
+                                        stroke-dasharray="314" stroke-dashoffset="94" transform="rotate(-90 60 60)"/>
+                            </svg>
+                            <div class="score">70%</div>
+                        </div>
+                        <p class="result-text">Good Match!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <a href="{{ url_for('auth.signup') }}" class="modal-btn primary">Try It Now</a>
+                <button onclick="closeModal('aiMatching')" class="modal-btn secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lightning Fast Modal -->
+<div id="lightningFastModal" class="modal-overlay">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('lightningFast')">&times;</span>
+        <div class="modal-content">
+            <div class="modal-icon">⚡</div>
+            <h2>Lightning Fast Processing</h2>
+            <p class="modal-subtitle">Watch the speed comparison</p>
+            
+            <div class="speed-comparison">
+                <div class="comparison-row">
+                    <div class="method">
+                        <h4>Manual Review</h4>
+                        <div class="time-bar manual">
+                            <div class="time-fill"></div>
+                        </div>
+                        <p class="time-text">⏱️ 5-10 minutes per resume</p>
+                    </div>
+                </div>
+                
+                <div class="vs-divider">VS</div>
+                
+                <div class="comparison-row">
+                    <div class="method">
+                        <h4>AI Resume Pro</h4>
+                        <div class="time-bar ai">
+                            <div class="time-fill-ai"></div>
+                        </div>
+                        <p class="time-text">⚡ 2-3 seconds per resume</p>
+                    </div>
+                </div>
+                
+                <div class="stats-box">
+                    <div class="stat">
+                        <h3>100x</h3>
+                        <p>Faster</p>
+                    </div>
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Resumes/Hour</p>
+                    </div>
+                    <div class="stat">
+                        <h3>95%</h3>
+                        <p>Time Saved</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <a href="{{ url_for('screening') }}" class="modal-btn primary">Start Screening</a>
+                <button onclick="closeModal('lightningFast')" class="modal-btn secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Analytics Modal -->
+<div id="analyticsModal" class="modal-overlay">
+    <div class="modal-box large">
+        <span class="close-btn" onclick="closeModal('analytics')">&times;</span>
+        <div class="modal-content">
+            <div class="modal-icon">📊</div>
+            <h2>Detailed Analytics Dashboard</h2>
+            <p class="modal-subtitle">Get insights that matter</p>
+            
+            <div class="analytics-preview">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="chart-icon">📈</div>
+                        <h4>Score Distribution</h4>
+                        <div class="mini-chart">
+                            <div class="bar" style="height: 40%"></div>
+                            <div class="bar" style="height: 70%"></div>
+                            <div class="bar" style="height: 55%"></div>
+                            <div class="bar" style="height: 85%"></div>
+                            <div class="bar" style="height: 60%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="chart-icon">🎯</div>
+                        <h4>Top Skills Matched</h4>
+                        <div class="skills-list">
+                            <div class="skill-bar">
+                                <span>Python</span>
+                                <div class="bar-fill" style="width: 85%">85%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <span>JavaScript</span>
+                                <div class="bar-fill" style="width: 72%">72%</div>
+                            </div>
+                            <div class="skill-bar">
+                                <span>React</span>
+                                <div class="bar-fill" style="width: 68%">68%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="chart-icon">📅</div>
+                        <h4>Weekly Trends</h4>
+                        <div class="trend-line">
+                            <svg width="200" height="80" viewBox="0 0 200 80">
+                                <polyline points="0,60 40,45 80,50 120,30 160,35 200,20" 
+                                          fill="none" stroke="#667eea" stroke-width="3"/>
+                                <polyline points="0,60 40,45 80,50 120,30 160,35 200,20 200,80 0,80" 
+                                          fill="url(#gradient)" opacity="0.3"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#667eea;stop-opacity:0" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="chart-icon">⭐</div>
+                        <h4>Success Rate</h4>
+                        <div class="success-circle">
+                            <svg width="100" height="100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#e0e0e0" stroke-width="8"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="8" 
+                                        stroke-dasharray="251" stroke-dashoffset="50" transform="rotate(-90 50 50)"/>
+                            </svg>
+                            <div class="circle-text">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <a href="{{ url_for('dashboard') }}" class="modal-btn primary">View Full Dashboard</a>
+                <button onclick="closeModal('analytics')" class="modal-btn secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Security Modal -->
+<div id="securityModal" class="modal-overlay">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('security')">&times;</span>
+        <div class="modal-content">
+            <div class="modal-icon">🔐</div>
+            <h2>Enterprise-Grade Security</h2>
+            <p class="modal-subtitle">Your data is safe with us</p>
+            
+            <div class="security-features">
+                <div class="security-item">
+                    <div class="sec-icon">🔒</div>
+                    <div class="sec-text">
+                        <h4>256-bit Encryption</h4>
+                        <p>Military-grade encryption for all your data</p>
+                    </div>
+                    <div class="sec-check">✓</div>
+                </div>
+                
+                <div class="security-item">
+                    <div class="sec-icon">🛡️</div>
+                    <div class="sec-text">
+                        <h4>GDPR Compliant</h4>
+                        <p>Full compliance with data protection regulations</p>
+                    </div>
+                    <div class="sec-check">✓</div>
+                </div>
+                
+                <div class="security-item">
+                    <div class="sec-icon">🔐</div>
+                    <div class="sec-text">
+                        <h4>Two-Factor Authentication</h4>
+                        <p>Extra layer of security for your account</p>
+                    </div>
+                    <div class="sec-check">✓</div>
+                </div>
+                
+                <div class="security-item">
+                    <div class="sec-icon">🚫</div>
+                    <div class="sec-text">
+                        <h4>Zero Data Sharing</h4>
+                        <p>We never sell or share your information</p>
+                    </div>
+                    <div class="sec-check">✓</div>
+                </div>
+                
+                <div class="security-item">
+                    <div class="sec-icon">💾</div>
+                    <div class="sec-text">
+                        <h4>Regular Backups</h4>
+                        <p>Automated daily backups to prevent data loss</p>
+                    </div>
+                    <div class="sec-check">✓</div>
+                </div>
+                
+                <div class="security-item">
+                    <div class="sec-icon">🔍</div>
+                    <div class="sec-text">
+                        <h4>Security Audits</h4>
+                        <p>Regular third-party security assessments</p>
+                    </div>
+                    <div class="sec-check">✓</div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge">🏆 SOC 2 Certified</div>
+                <div class="badge">✓ ISO 27001</div>
+                <div class="badge">🔒 SSL Secured</div>
+            </div>
+            
+            <div class="modal-actions">
+                <a href="{{ url_for('auth.signup') }}" class="modal-btn primary">Get Started Securely</a>
+                <button onclick="closeModal('security')" class="modal-btn secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal(modalName) {
+    var modalId = modalName + 'Modal';
+    document.getElementById(modalId).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalName) {
+    var modalId = modalName + 'Modal';
+    document.getElementById(modalId).style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Animate particles
+document.addEventListener('DOMContentLoaded', function() {
+    var particles = document.querySelectorAll('.particle');
+    particles.forEach(function(particle, index) {
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = index * 0.5 + 's';
+    });
+});
+</script>
+
+<style>
+.home-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    position: relative;
+}
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: float 15s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-100px) translateX(50px); }
+    50% { transform: translateY(-200px) translateX(-30px); }
+    75% { transform: translateY(-150px) translateX(70px); }
+}
+
+.hero-section {
+    text-align: center;
+    padding: 100px 20px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-title {
+    font-size: 4em;
+    color: white;
+    margin-bottom: 30px;
+    line-height: 1.2;
+    text-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.cta-buttons {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 18px 45px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-5px);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 80px;
+    padding: 0 20px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(102, 126, 234, 0.6);
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+    background: rgba(102, 126, 234, 0.15);
+}
+
+.feature-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    color: white;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.card-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 2em;
+    color: #667eea;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-box {
+    background: linear-gradient(135deg, #1e1e2e, #2d2d44);
+    border-radius: 25px;
+    padding: 50px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s ease-out;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.modal-box.large {
+    max-width: 900px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #667eea;
+    transform: rotate(90deg);
+}
+
+.modal-icon {
+    font-size: 5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content h2 {
+    color: white;
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* AI Matching Demo */
+.matching-demo {
+    margin: 30px 0;
+}
+
+.demo-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.demo-label {
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: rgba(102, 126, 234, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.skill-tag.matched {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.skill-tag.partial {
+    background: rgba(251, 191, 36, 0.2);
+    border-color: #fbbf24;
+    color: #fbbf24;
+}
+
+.skill-tag.missing {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.matching-arrow {
+    text-align: center;
+    color: #667eea;
+    font-weight: 700;
+    margin: 20px 0;
+    font-size: 1.1em;
+}
+
+.match-result {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.progress-circle {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: 700;
+    color: white;
+}
+
+.result-text {
+    color: #10b981;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+/* Speed Comparison */
+.speed-comparison {
+    margin: 30px 0;
+}
+
+.comparison-row {
+    margin-bottom: 30px;
+}
+
+.method h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.time-bar {
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.time-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ef4444, #f97316);
+    animation: fillManual 3s ease-out;
+    width: 100%;
+}
+
+.time-fill-ai {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #06b6d4);
+    animation: fillAI 0.5s ease-out;
+    width: 5%;
+}
+
+@keyframes fillManual {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes fillAI {
+    from { width: 0; }
+    to { width: 5%; }
+}
+
+.time-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95em;
+}
+
+.vs-divider {
+    text-align: center;
+    color: #667eea;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+.stats-box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.stat p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+}
+
+/* Analytics Preview */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.analytics-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+}
+
+.chart-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.analytics-card h4 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.mini-chart {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: flex-end;
+    height: 80px;
+}
+
+.bar {
+    width: 25px;
+    background: linear-gradient(to top, #667eea, #764ba2);
+    border-radius: 5px 5px 0 0;
+    animation: growBar 1s ease-out;
+}
+
+@keyframes growBar {
+    from { height: 0; }
+}
+
+.skills-list {
+    text-align: left;
+}
+
+.skill-bar {
+    margin-bottom: 15px;
+}
+
+.skill-bar span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bar-fill {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85em;
+    animation: fillBar 1.5s ease-out;
+}
+
+@keyframes fillBar {
+    from { width: 0; }
+}
+
+.success-circle {
+    position: relative;
+    display: inline-block;
+}
+
+.circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #10b981;
+}
+
+/* Security Features */
+.security-features {
+    margin: 30px 0;
+}
+
+.security-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.security-item:hover {
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateX(5px);
+}
+
+.sec-icon {
+    font-size: 2.5em;
+}
+
+.sec-text {
+    flex: 1;
+}
+
+.sec-text h4 {
+    color: white;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.sec-text p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9em;
+}
+
+.sec-check {
+    color: #10b981;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    border: 1px solid #10b981;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+}
+
+.modal-btn.primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.modal-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+.modal-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+    .hero-title { font-size: 3em; }
+    .analytics-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .hero-title { font-size: 2em; }
+    .modal-box { padding: 30px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .modal-actions { flex-direction: column; }
+}
+</style>
+{% endblock %} 

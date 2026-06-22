@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Screening</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI-Powered Resume Screening</h1>
+            <p class="subtitle">Upload resume and job description to get instant AI match score</p>
+        </div>
+        
+        <div class="upload-section">
+            <div class="form-group">
+                <label>Upload Resume (PDF only)</label>
+                <input type="file" id="resumeInput" accept=".pdf">
+                <small>Maximum file size: 16MB</small>
+            </div>
+            
+            <div class="form-group">
+                <label>Job Description</label>
+                <textarea id="jobDescription" rows="10" placeholder="Paste the job description here..."></textarea>
+            </div>
+            
+            <button id="submitBtn" onclick="checkMatch()">Check Match Score</button>
+        </div>
+        
+        <div id="result" class="result-section" style="display:none;">
+            <h2>Match Result</h2>
+            <div id="scoreDisplay" class="score-box"></div>
+            <div id="qualityDisplay" class="quality-badge"></div>
+            <p style="color: rgba(255,255,255,0.8); margin-top: 20px;">Preparing detailed analysis...</p>
+            <button onclick="window.location.href='/analysis'" style="margin-top: 20px; padding: 14px 35px;">
+                View Detailed Analysis
+            </button>
+        </div>
+        
+        <div id="loading" style="display:none;" class="loading">
+            <div class="spinner"></div>
+            <p>AI is analyzing your resume...</p>
+        </div>
+    </div>
+    
+    <script>
+        async function checkMatch() {
+            const resumeInput = document.getElementById('resumeInput');
+            const jobDescription = document.getElementById('jobDescription').value;
+            const resultDiv = document.getElementById('result');
+            const loadingDiv = document.getElementById('loading');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (!resumeInput.files[0]) {
+                alert('Please upload a resume PDF');
+                return;
+            }
+            
+            if (!jobDescription.trim()) {
+                alert('Please enter a job description');
+                return;
+            }
+            
+            loadingDiv.style.display = 'block';
+            resultDiv.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Analyzing...";
+
+            
+            const formData = new FormData();
+            formData.append('resume', resumeInput.files[0]);
+            formData.append('job_description', jobDescription);
+            
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                loadingDiv.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Check Match Score";
+
+                
+                if (data.success) {
+                    resultDiv.style.display = 'block';
+                    document.getElementById('scoreDisplay').innerHTML = 
+                        '<div class="score-number">' + data.score + '%</div>';
+                    document.getElementById('qualityDisplay').innerHTML = 
+                        '<div class="quality">' + data.quality + '</div>';
+                    
+                    if (data.redirect) {
+                        setTimeout(() => {
+                            window.location.href = data.redirect;
+                        }, 1500);
+                    }
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                loadingDiv.style.display = 'none';
+                submitBtn.disabled = false;
+                alert('Error connecting to server');
+            }
+        }
+    </script>
+</body>
+</html> 

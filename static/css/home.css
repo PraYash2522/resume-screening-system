@@ -1,0 +1,280 @@
+/* Professional Landing Page - Corporate Premium */
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin-bottom: 100px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 50px;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-bottom: 35px;
+    letter-spacing: 0.5px;
+    animation: slideDown 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    color: #ffffff;
+    font-size: 4.5em;
+    font-weight: 800;
+    margin-bottom: 30px;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.35em;
+    margin-bottom: 45px;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease-out 0.5s backwards;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.7s backwards;
+}
+
+.btn {
+    padding: 16px 40px;
+    font-size: 1.05em;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    width: 100%;
+    animation: fadeIn 1s ease-out 0.9s backwards;
+}
+
+.feature-card {
+    background: rgba(30, 30, 46, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(120, 119, 198, 0.2);
+    border-radius: 20px;
+    padding: 40px 32px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    border-color: rgba(120, 119, 198, 0.4);
+}
+
+.feature-icon {
+    font-size: 3em;
+    margin-bottom: 22px;
+}
+
+.feature-card h3 {
+    color: #ffffff;
+    font-size: 1.4em;
+    margin-bottom: 14px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.98em;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3em;
+        letter-spacing: -1px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.15em;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2em;
+    }
+    
+    .feature-card {
+        padding: 32px 24px;
+    }
+} 
+/* Polish - Smoother Animations */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(20px, 20px);
+    }
+}
+
+/* Better button effects */
+.btn {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-2px) scale(0.98) !important;
+} 

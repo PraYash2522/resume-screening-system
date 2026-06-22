@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/analysis.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AI Resume Pro</a>
+            <ul class="nav-menu">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/screening">Screen Resume</a></li>
+                <li><a href="/logout" class="nav-logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="analysis-container">
+        <div class="analysis-header">
+            <h1>Detailed Resume Analysis</h1>
+            <p>Comprehensive breakdown of resume-job match</p>
+        </div>
+
+        <div class="score-section">
+            <div class="main-score">
+                <div class="score-display">
+                    <div class="score-text">
+                        <span class="score-number" id="overallScore">0%</span>
+                        <span class="score-label">Overall Match</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-scores">
+            <h2>Score Breakdown</h2>
+            <div class="scores-grid">
+                <div class="score-item">
+                    <div class="score-info">
+                        <span class="score-name">Skills Match</span>
+                        <span class="score-value" id="skillsScore">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="skillsBar"></div>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-info">
+                        <span class="score-name">Experience Match</span>
+                        <span class="score-value" id="expScore">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="expBar"></div>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-info">
+                        <span class="score-name">Education Match</span>
+                        <span class="score-value" id="eduScore">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="eduBar"></div>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-info">
+                        <span class="score-name">Keyword Density</span>
+                        <span class="score-value" id="keyScore">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="keyBar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insights-grid">
+            <div class="insight-card">
+                <h3>Strengths</h3>
+                <ul id="strengthsList"></ul>
+            </div>
+
+            <div class="insight-card">
+                <h3>Missing Skills</h3>
+                <ul id="missingList"></ul>
+            </div>
+        </div>
+
+        <div class="matched-section" id="matchedSection" style="display:none;">
+            <h3>Matched Skills</h3>
+            <div class="skills-tags" id="matchedTags"></div>
+        </div>
+
+        <div class="suggestions-section">
+            <h3>Smart Suggestions</h3>
+            <div class="suggestions-list" id="suggestionsList"></div>
+        </div>
+
+        <div class="actions-section">
+            <a href="/screening" class="btn-action primary">Screen Another</a>
+            <a href="/dashboard" class="btn-action secondary">Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        // Get analysis data from Flask
+        const analysis = JSON.parse('{{ analysis_json | safe }}');
+        
+        // Populate scores
+        document.getElementById('overallScore').textContent = analysis.overall_score + '%';
+        document.getElementById('skillsScore').textContent = analysis.skills_score + '%';
+        document.getElementById('expScore').textContent = analysis.experience_score + '%';
+        document.getElementById('eduScore').textContent = analysis.education_score + '%';
+        document.getElementById('keyScore').textContent = analysis.keyword_density + '%';
+        
+        // Animate progress bars
+        document.getElementById('skillsBar').style.width = analysis.skills_score + '%';
+        document.getElementById('expBar').style.width = analysis.experience_score + '%';
+        document.getElementById('eduBar').style.width = analysis.education_score + '%';
+        document.getElementById('keyBar').style.width = analysis.keyword_density + '%';
+        
+        // Populate strengths
+        const strengthsList = document.getElementById('strengthsList');
+        analysis.strengths.forEach(strength => {
+            const li = document.createElement('li');
+            li.textContent = strength;
+            strengthsList.appendChild(li);
+        });
+        
+        // Populate missing skills
+        const missingList = document.getElementById('missingList');
+        if (analysis.missing_skills.length > 0) {
+            analysis.missing_skills.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                missingList.appendChild(li);
+            });
+        } else {
+            const li = document.createElement('li');
+            li.textContent = 'All requirements covered';
+            missingList.appendChild(li);
+        }
+        
+        // Populate matched skills
+        if (analysis.matched_skills.length > 0) {
+            document.getElementById('matchedSection').style.display = 'block';
+            const matchedTags = document.getElementById('matchedTags');
+            analysis.matched_skills.forEach(skill => {
+                const span = document.createElement('span');
+                span.className = 'skill-tag';
+                span.textContent = skill;
+                matchedTags.appendChild(span);
+            });
+        }
+        
+        // Populate suggestions
+        const suggestionsList = document.getElementById('suggestionsList');
+        analysis.suggestions.forEach((suggestion, index) => {
+            const div = document.createElement('div');
+            div.className = 'suggestion-item';
+            div.innerHTML = `
+                <span class="suggestion-number">${index + 1}</span>
+                <p>${suggestion}</p>
+            `;
+            suggestionsList.appendChild(div);
+        });
+    </script>
+</body>
+</html> 
